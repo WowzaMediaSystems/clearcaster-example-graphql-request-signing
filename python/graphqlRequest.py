@@ -1,11 +1,8 @@
-import requests
+import urllib.request
+import urllib.parse
 import time
 import hashlib
 import hmac
-import base64
-import binascii
-
-# pip install requests
 
 CONTENTTYPE_JSON = "application/json"
 GRAPHAPI_DATALIMIT = 1024*1024*1024
@@ -21,17 +18,18 @@ url = "https://clearcaster.c2.wowza.com/graphql"
 domain = "clearcaster.c2.wowza.com"
 
 requestStr = "{\"query\":\"query allEncoders { allEncoders { id name } }\"}"
+data = requestStr.encode('ascii')
 
 currTime = int(round(time.time() * 1000))
 
-currTimeBytes = bytes(str(currTime)).encode(CHARACTER_ENCODING)
-secretBytes = bytes(secret).encode(CHARACTER_ENCODING)
-domainBytes = bytes(domain).encode(CHARACTER_ENCODING)
+currTimeBytes = bytes(str(currTime), encoding=CHARACTER_ENCODING)
+secretBytes = bytes(secret, encoding=CHARACTER_ENCODING)
+domainBytes = bytes(domain, encoding=CHARACTER_ENCODING)
 
 sig1 = hmac.new(secretBytes, currTimeBytes, digestmod=hashlib.sha256).digest()
 sig2 = hmac.new(sig1, domainBytes, digestmod=hashlib.sha256).digest()
 
-authorizationHeader = "HMAC-SHA256, Credential=" + key + ", SignedHeaders=host;x-date, Signature=" + binascii.hexlify(sig2)
+authorizationHeader = "HMAC-SHA256, Credential=" + key + ", SignedHeaders=host;x-date, Signature=" + sig2.hex()
 
 headers = {
 	'Authorization': authorizationHeader,
@@ -40,6 +38,6 @@ headers = {
 	'Accept': CONTENTTYPE_JSON
 	}
 
-response = requests.post(url = url, headers = headers, data = requestStr)
-
-print(response.text)
+req = urllib.request.Request(url, data, headers)
+with urllib.request.urlopen(req) as response:
+   print(response.read().decode(CHARACTER_ENCODING))

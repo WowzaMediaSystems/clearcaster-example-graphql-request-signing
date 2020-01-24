@@ -23,10 +23,10 @@ To obtain and API key and secret key, sign in to the [Wowza ClearCaster Manager]
   2. Host the file on a web server that has [PHP 7](https://www.php.net/) or later installed.
   3. Open a browser and the enter URL that points to **graphqlRequest.php**.
 
-## Python
+## Python (3.x)
   1. Install [Python](https://www.python.org/).
   2. Modify the **graphqlRequest.py** file to replace **[API-Key-Here]** and **[Secret-Key-Here]** with the API key values from the Wowza ClearCaster Manager **Integrations** tab.
-  3. Run `./install.sh` then `./run.sh`.
+  3. Run `./run.sh`.
 
 ## .NET (C#)
   1. Install [Visual Studio 2019](https://visualstudio.microsoft.com/vs/).
@@ -36,4 +36,4 @@ To obtain and API key and secret key, sign in to the [Wowza ClearCaster Manager]
 
 ## cURL
   1. Modify the **run.sh** file to replace **[API-Key-Here]** and **[Secret-Key-Here]** with the API key values from the Wowza ClearCaster Manager **Integrations** tab.
-  2. Run **./run.sh**
+  2. Run `./run.sh`.
