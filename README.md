@@ -59,6 +59,6 @@ let authorizationHeader =`HMAC-SHA256, Credential=${key}, SignedHeaders=host;x-d
 console.log(hmacDigest);
 
 pm.environment.set("authorizationHeader", authorizationHeader);
-pm.environment.set("timeNow", requestTime);`
+pm.environment.set("timeNow", requestTime);
 ```
   4. Set your query to `POST` and URL to `https://clearcaster.c2.wowza.com/graphql`
