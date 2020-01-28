@@ -41,6 +41,7 @@ To obtain and API key and secret key, sign in to the [Wowza ClearCaster Manager]
 ## Postman (via Pre-Request Script)
   1. In the Body tab, select the radio button for **GraphQL**. Build your query in the Query window.
   2. In the Headers tab, create two key value pairs for Authorization and X-Date with variables as the values.
+![Postman header tab with 2 key value pair headers](Postman-Headers.PNG)
   3. In the Pre-Request Script tab, copy the following script. 
 
 ```JavaScript
