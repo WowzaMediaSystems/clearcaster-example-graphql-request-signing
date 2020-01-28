@@ -37,3 +37,27 @@ To obtain and API key and secret key, sign in to the [Wowza ClearCaster Manager]
 ## cURL
   1. Modify the **run.sh** file to replace **[API-Key-Here]** and **[Secret-Key-Here]** with the API key values from the Wowza ClearCaster Manager **Integrations** tab.
   2. Run `./run.sh`.
+  
+## Postman (via Pre-Request Script)
+  1. In the Body tab, select the radio button for **GraphQL**. Build your query in the Query window.
+  2. In the Headers tab, create two key value pairs for Authorization and X-Date with variables as the values.
+  3. In the Pre-Request Script tab, copy the following script. 
+
+```JavaScript
+var crypto = require('crypto-js');
+let requestTime = Date.now();
+
+let key = "{{APIKEY}}";
+let secret = "{{SECRETKEY}}";
+
+let domain = "clearcaster.c2.wowza.com";
+
+let hmacDigest = crypto.enc.Hex.stringify(crypto.HmacSHA256(domain, crypto.HmacSHA256(requestTime.toString(), secret)));
+let authorizationHeader =`HMAC-SHA256, Credential=${key}, SignedHeaders=host;x-date, Signature=${hmacDigest}`;
+
+console.log(hmacDigest);
+
+pm.environment.set("authorizationHeader", authorizationHeader);
+pm.environment.set("timeNow", requestTime);`
+```
+  4. Set your query to `POST` and URL to `https://clearcaster.c2.wowza.com/graphql`
