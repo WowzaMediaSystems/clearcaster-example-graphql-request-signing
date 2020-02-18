@@ -2,6 +2,8 @@
 
 This repository contains brief code examples in several different languages that illustrate how to sign Wowza ClearCaster GraphQL API requests. See [Wowza ClearCaster GraphQL API documentation](https://www.wowza.com/docs/wowza-clearcaster-graphql-api) for more information about the API and its use.
 
+**Please note double quotes may need to be escaped as follows `\\\"`.**
+
 ## Prequisites
 - An API key
 - A secret key
