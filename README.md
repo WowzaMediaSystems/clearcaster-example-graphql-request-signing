@@ -64,3 +64,7 @@ pm.environment.set("authorizationHeader", authorizationHeader);
 pm.environment.set("timeNow", requestTime);
 ```
   4. Set your query to `POST` and URL to `https://clearcaster.c2.wowza.com/graphql`
+
+## License
+
+This code is distributed under the [BSD-3 License](LICENSE.txt).
